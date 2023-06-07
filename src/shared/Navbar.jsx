@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const optionItems = <>
-        <li><a>Submenu 1</a></li>
-        <li><a>Submenu 2</a></li>
-        <li><a>Submenu 1</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/classes">Classes</Link></li>
+        <li><a>Instructors</a></li>
         <li><a>Submenu 2</a></li>
     </>
     return (
@@ -28,9 +29,11 @@ const Navbar = () => {
 
                 <div className="dropdown dropdown-end ml-3 lg:ml-8 mr-5">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+
                         <div className="w-10 rounded-full">
                             <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </div>
+
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                         <li>
