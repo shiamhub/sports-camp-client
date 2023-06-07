@@ -5,7 +5,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-    const {googleLogin} = useContext(AuthContext);
+    const {googleLogin, login} = useContext(AuthContext);
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -21,6 +21,13 @@ const Login = () => {
 
     const onSubmit = data => {
         console.log(data);
+        login(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
     console.log(errors);
 
