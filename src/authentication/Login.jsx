@@ -1,11 +1,15 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
-    const {googleLogin, login} = useContext(AuthContext);
+    const {googleLogin, login, user} = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -30,6 +34,12 @@ const Login = () => {
             })
     }
     console.log(errors);
+
+    useEffect(() => {
+        if(user) {
+            navigate(from, { replace: true });
+        }
+    }, [user, from, navigate])
 
     return (
         <div className="hero min-h-screen bg-base-200">
