@@ -10,7 +10,7 @@ const ClassesHome = () => {
     return (
         <div className="w-10/12 mx-auto">
             {
-                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set - a.students) ? "bg-base-100" : "bg-red-500"} shadow-xl mt-12`}>
+                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set - a.students) ? "bg-base-100" : "bg-red-500 text-white"} shadow-xl mt-12`}>
                     <figure><img className="w-[500px]" src={a.image} alt="Album" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">{a.class}</h2>
