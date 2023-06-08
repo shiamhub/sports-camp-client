@@ -7,6 +7,8 @@ import InstructorsHome from "../pages/Instructors/InstructorsHome";
 import Login from "../authentication/Login";
 import SignUp from "../authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import AllUsers from "../pages/Dashboard/AllUsers";
 
 const Routes = createBrowserRouter([
     {
@@ -33,6 +35,18 @@ const Routes = createBrowserRouter([
             {
                 path: '/signUp',
                 element: <SignUp></SignUp>
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+            {
+                path: '/dashboard/allUsers',
+                element: <AllUsers></AllUsers>
+
             }
         ]
     }

@@ -17,7 +17,9 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/classes">Classes</Link></li>
         <li><Link to="/instructors">Instructors</Link></li>
-        <li><a>Submenu 2</a></li>
+        {
+            user && <li><Link to="/dashboard">Dashboard</Link></li>
+        }
     </>
     return (
         <div className="bg-base-300">
