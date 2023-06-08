@@ -27,6 +27,21 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
+            // const savedUser = { name: 'Shiam' };
+            // // const savedUser = { name: user?.displayName, email: user?.email };
+            // if(savedUser) {
+            //     fetch('http://localhost:5000/users', {
+            //     method: 'POST',
+            //     headers: {
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(savedUser)
+            // })
+            //     .then(res => res.json())
+            //     .then(data => {
+            //         setUser(data);
+            //     })
+            // }
             setLoading(false);
             setUser(user);
         })

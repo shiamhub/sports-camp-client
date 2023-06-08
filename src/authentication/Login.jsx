@@ -14,7 +14,21 @@ const Login = () => {
     const handleGoogleLogin = () => {
         googleLogin()
         .then(result => {
-            console.log(result.user);
+            const nowUser = result?.user
+            const savedUser = { name: nowUser?.displayName, email: nowUser?.email };
+            if(nowUser) {
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(savedUser)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                })
+            }
         })
         .catch(error => {
             console.log(error);
@@ -24,7 +38,6 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
         login(data.email, data.password)
             .then(result => {
                 console.log(result.user);

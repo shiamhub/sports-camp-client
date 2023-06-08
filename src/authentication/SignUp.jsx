@@ -10,7 +10,6 @@ const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
         setError('');
         if (data.password === data.confirmPassword) {
             signUp(data.email, data.password)
@@ -18,7 +17,20 @@ const SignUp = () => {
                     console.log(result.user);
                     updateUserProfile(data.name, data.photoURL)
                         .then(() => {
-                            console.log("Profile Updated");
+                            const savedUser = {name: data.name, email: data.email}
+                            fetch('http://localhost:5000/users', {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(savedUser)
+                            })
+                                .then(res => res.json())
+                                .then(data => {
+                                    if(data.insertedId) {
+                                        alert('User created successfully');
+                                    }
+                                })
                         })
                         .catch(error => {
                             console.log(error);
