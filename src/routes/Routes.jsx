@@ -7,8 +7,9 @@ import InstructorsHome from "../pages/Instructors/InstructorsHome";
 import Login from "../authentication/Login";
 import SignUp from "../authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../pages/Dashboard/Dashboard";
-import AllUsers from "../pages/Dashboard/AllUsers";
+import StudentDashboard from "../pages/Dashboard/StudentDashboard/StudentDashboard";
+import HomeDashBoard from "../pages/Dashboard/HomeDashboard/HomeDashboard";
+import AllUsers from "../pages/Dashboard/AdminDashBoard/AllUsers";
 
 const Routes = createBrowserRouter([
     {
@@ -40,13 +41,16 @@ const Routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <HomeDashBoard></HomeDashBoard>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/dashboard/allUsers',
                 element: <AllUsers></AllUsers>
-
+            },
+            {
+                path: '/dashboard/studentDashboard',
+                element: <StudentDashboard></StudentDashboard>
             }
         ]
     }

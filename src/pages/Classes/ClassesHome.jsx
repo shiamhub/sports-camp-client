@@ -1,12 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const ClassesHome = () => {
     const [classes, setClasses] = useState([]);
+    const { user } = useContext(AuthContext);
     useEffect(() => {
         fetch('http://localhost:5000/class')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [])
+
+    const handleAddToCart = (a) => {
+        const addItem = {
+            className: a.class,
+            price: a.price,
+            insName: a.insName,
+            email: user?.email,
+        }
+        fetch('http://localhost:5000/addCart', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addItem)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+    }
+
     return (
         <div className="w-10/12 mx-auto">
             {
@@ -19,7 +40,7 @@ const ClassesHome = () => {
                         <p>Available seats: {a.set}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
-                            <button disabled={!(a.set - a.students)} className="btn btn-primary">Listen</button>
+                            <button onClick={() => handleAddToCart(a)} disabled={!(a.set - a.students)} className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>

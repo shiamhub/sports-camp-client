@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
-    console.log(users);
     useEffect(() => {
         fetch('http://localhost:5000/users')
             .then(res => res.json())
@@ -51,7 +50,7 @@ const AllUsers = () => {
                                 <td>{a.email}</td>
                                 <td>
                                     {
-                                        a.role === 'instructor' ? "Instructor" : <button onClick={() => handleInstructor(a._id)} className="btn btn-primary btn-sm mx-8">Instructor</button>
+                                        a.role === 'instructor' ? <span className="mx-8">Instructor</span> : <button onClick={() => handleInstructor(a._id)} className="btn btn-primary btn-sm mx-8">Instructor</button>
                                     }
                                     {
                                         a.role === 'admin' ? "Admin" : <button onClick={() => handleAdmin(a._id)} className="btn btn-primary btn-sm">Admin</button>
