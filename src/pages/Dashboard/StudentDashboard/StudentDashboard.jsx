@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import axios from "axios";
 
 const StudentDashboard = () => {
     const { user } = useContext(AuthContext);
-    console.log(user);
+    const [cart, setCart] = useState([]);
     useEffect(() => {
         if (user?.email) {
             axios.get(`http://localhost:5000/addCart?email=${user?.email}`, {
@@ -12,13 +12,15 @@ const StudentDashboard = () => {
                     authorization: `Bearer ${localStorage.getItem('access-token')}`
                 }
             })
-            .then(res => console.log(res.data))
+            .then(res => setCart(res.data))
         }
 
     }, [user?.email])
     return (
         <div>
-            <h1>Student Dashboard</h1>
+            {
+                cart.map(a => <div key={a._id}>{a.className}</div>)
+            }
         </div>
     );
 };

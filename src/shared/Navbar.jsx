@@ -58,7 +58,7 @@ const Navbar = () => {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
+                                <li><a>{user?.email}</a></li>
                                 <li onClick={() => handleLogOut()}><a>Logout</a></li>
                             </ul>
                         </> : <Link to="/login"><button className="btn btn-primary">Login</button></Link>
