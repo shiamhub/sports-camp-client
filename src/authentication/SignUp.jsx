@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
     const [error, setError] = useState('');
@@ -28,7 +29,15 @@ const SignUp = () => {
                                 .then(res => res.json())
                                 .then(data => {
                                     if(data.insertedId) {
-                                        alert('User created successfully');
+                                        Swal.fire({
+                                            title: 'User created successfully',
+                                            showClass: {
+                                                popup: 'animate__animated animate__fadeInDown'
+                                            },
+                                            hideClass: {
+                                                popup: 'animate__animated animate__fadeOutUp'
+                                            }
+                                        })
                                     }
                                 })
                         })

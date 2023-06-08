@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
     const [users, setUsers] = useState([]);
@@ -11,22 +12,90 @@ const AllUsers = () => {
     }, [])
 
     const handleInstructor = (id) => {
-        fetch(`http://localhost:5000/user/instructor/${id}`, {
-            method: 'PATCH'
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/user/instructor/${id}`, {
+                    method: 'PATCH'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })        
+
     }
     const handleAdmin = (id) => {
-        fetch(`http://localhost:5000/user/admin/${id}`, {
-            method: 'PATCH'
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/user/admin/${id}`, {
+                    method: 'PATCH'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-            })
+
+    }
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/userDelete/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                        }
+                    })
+
+            }
+        })
     }
 
     return (
@@ -56,7 +125,7 @@ const AllUsers = () => {
                                         a.role === 'admin' ? "Admin" : <button onClick={() => handleAdmin(a._id)} className="btn btn-primary btn-sm">Admin</button>
                                     }
                                 </td>
-                                <td><button className="btn btn-error btn-sm text-white">Delete</button></td>
+                                <td><button onClick={() => handleDelete(a._id)} className="btn btn-error btn-sm text-white">Delete</button></td>
                             </tr>
                             )}
                     </tbody>
