@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useRole from "../../../hooks/useRole";
 
 const HomeDashBoard = () => {
@@ -16,10 +16,10 @@ const HomeDashBoard = () => {
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 { !isLoading && <ul className="menu p-4 w-80 h-full bg-base-300 text-base-content">
-                    { role?.role === "admin" && <li><Link to="/dashboard/allUsers">All Users</Link></li>}
-                    { role?.role === "instructor" && <li><a>Sidebar Item 2</a></li>}
-                    <li><Link to="/">Home</Link></li>
-                    { role?.role === "student" && <li><Link to="/dashboard/studentDashboard">Student Dashboard</Link></li>}
+                    { role?.role === "admin" && <li><NavLink to="/dashboard/allUsers">All Users</NavLink></li>}
+                    { role?.role === "instructor" && <li><NavLink to="/dashboard/addClass">Instructor Dashboard</NavLink></li>}
+                    <li><NavLink to="/">Home</NavLink></li>
+                    { role?.role === "student" && <li><NavLink to="/dashboard/studentDashboard">Student Dashboard</NavLink></li>}
                 </ul>}
 
             </div>

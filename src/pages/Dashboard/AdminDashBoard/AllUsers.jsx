@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import Swal from "sweetalert2";
+// import { AddContext } from "../InstructorDashboard/AddClass";
 
 const AllUsers = () => {
+    // const {add} = useContext(AddContext);
+    // console.log(add);
     const [users, setUsers] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/users')
