@@ -1,16 +1,59 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const AddClass = () => {
-    const { user, add, setAdd } = useContext(AuthContext);
-    console.log(add);
+    const { user, approved } = useContext(AuthContext);
+    console.log(approved)
+    const [axiosSecure] = useAxiosSecure();
 
-    const { register, handleSubmit, reset } = useForm();
+    const imagesHosting = import.meta.env.VITE_IMAGE_UPLOAD_URL;
+
+    const imageURl = `https://api.imgbb.com/1/upload?key=${imagesHosting}`
+
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        setAdd(data);
-        reset();
+        const fromData = new FormData();
+        fromData.append("image", data.image[0]);
+
+        fetch(imageURl, {
+            method: "POST",
+            body: fromData
+        })
+            .then(res => res.json())
+            .then(imData => {
+                if(imData.success){
+                    const imgURL = imData.data.display_url;
+                    const { price, className, availableSeats } = data;
+                    const newClasses = {
+                        image: imgURL,
+                        instructorName: user?.displayName,
+                        instructorEmail: user?.email,
+                        price: parseFloat(price),
+                        className,
+                        availableSeats,
+                        status: approved === 'Approved' ? "Approved" : "pending"
+                    }
+                    axiosSecure.post("/newClasses", newClasses)
+                        .then(res => {
+                            if (res.data.acknowledged) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Class Added',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+
+                            }
+                        })
+                    
+                }
+            })
+
+        // reset();
     }
 
     return (
@@ -20,14 +63,14 @@ const AddClass = () => {
                     <label className="label">
                         <span className="label-text">Instructor name</span>
                     </label>
-                    <input type="name" {...register("instructorName")} placeholder="Type here" defaultValue={user?.displayName} className="input input-bordered w-full" />
+                    <input type="name" defaultValue={user?.displayName} {...register("instructorName")} placeholder="Type here" className="input input-bordered w-full" />
 
                 </div>
                 <div className="form-control w-full">
                     <label className="label">
                         <span className="label-text">Instructor email</span>
                     </label>
-                    <input type="email" {...register("instructorEmail")} placeholder="Type here" defaultValue={user?.email} className="input input-bordered w-full" />
+                    <input type="email" defaultValue={user?.email} {...register("instructorEmail")} placeholder="Type here" className="input input-bordered w-full" />
 
                 </div>
             </div>

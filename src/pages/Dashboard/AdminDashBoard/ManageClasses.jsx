@@ -1,21 +1,49 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const ManageClasses = () => {
-    const {add, loading} = useContext(AuthContext);
-    console.log(add)
+    const { loading, setApproved } = useContext(AuthContext);
+    
     const [axiosSecure] = useAxiosSecure();
+    const [newData, setNewData] = useState({});
 
-    const { data: classes } = useQuery({
-        queryKey: ["classes"],
+    const { data: classes, refetch } = useQuery({
+        queryKey: ["newClasses"],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get("/classes");
+            const res = await axiosSecure.get("/newClasses");
             return res.data;
         }
     })
+
+    const handleApproved = (id) => {
+        console.log(id);
+        axiosSecure.get(`/newClasses/${id}`)
+            .then(res => {
+                setNewData(res.data);
+                newData.nid = id;
+                setApproved('Approved');
+                axiosSecure.post('/newClasses/approved', newData)
+                    .then(res => {
+                        refetch();
+                        console.log(res.data);
+                    })
+            })
+
+    }
+    const handleDenied = (id) => {
+        console.log(id);
+        axiosSecure.delete(`/newClasses/denied/${id}`)
+            .then(res => {
+                newData.status = 'Denied';
+                refetch();
+                console.log(res.data);
+            })
+
+    }
+
     return (
         <div className="w-full">
             <div className="overflow-x-auto">
@@ -27,10 +55,10 @@ const ManageClasses = () => {
                             <th>Class Name</th>
                             <th>Instructors Name</th>
                             <th>Email</th>
-                            <th>Student</th>
                             <th>Available seats</th>
                             <th>Price</th>
-                            <th>Delete</th>
+                            <th>Status</th>
+                            <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,13 +72,18 @@ const ManageClasses = () => {
                                         </div>
                                     </div>
                                 </th>
-                                <td>{a.class}</td>
-                                <td>{a.insName}</td>
-                                <td>{a?.email}</td>
-                                <td>{a?.students}</td>
-                                <td>{a?.set}</td>
+                                <td>{a?.className}</td>
+                                <td>{a?.instructorName}</td>
+                                <td>{a?.instructorEmail}</td>
+                                <td>{a?.availableSeats}</td>
                                 <td>{a?.price}</td>
-                                <td><button className="btn btn-error btn-sm text-white">Delete</button></td>
+                                <td>{a?.status}</td>
+                                <td>
+                                    <div>
+                                        <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white mr-5">Approved</button>
+                                        <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
+                                    </div>
+                                </td>
                             </tr>
                             )}
                     </tbody>
