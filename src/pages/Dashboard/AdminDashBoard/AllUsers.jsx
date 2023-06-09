@@ -1,28 +1,34 @@
-import {  useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useContext } from "react";
 // import { AddContext } from "../InstructorDashboard/AddClass";
 
 const AllUsers = () => {
-    // const {add} = useContext(AddContext);
-    // console.log(add);
-    const [users, setUsers] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/users')
-            .then(res => res.json())
-            .then(data => {
-                setUsers(data);
-            })
-    }, [])
+    
+    const [axiosSecure] = useAxiosSecure();
+    const token = localStorage.getItem("access-token");
+    const { user } = useContext(AuthContext);
+
+    const { data: users, refetch } = useQuery({
+        queryKey: ["users"],
+        enabled: !!token && !!user?.email,
+        queryFn: async () => {
+            const res = await axiosSecure.get("/users");
+            return res.data;
+        }
+    })
 
     const handleInstructor = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
-            icon: 'warning',
+            icon: 'success',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, Instructor it!'
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`http://localhost:5000/user/instructor/${id}`, {
@@ -31,9 +37,10 @@ const AllUsers = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.modifiedCount) {
+                            refetch();
                             Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
+                                'Instructor!',
+                                'Your Are Instructor.',
                                 'success'
                             )
                         }
@@ -60,6 +67,7 @@ const AllUsers = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.modifiedCount) {
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
@@ -83,12 +91,11 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/userDelete/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.deletedCount) {
+                axiosSecure.delete(`/userDelete/${id}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.deletedCount > 0) {
+                            refetch();
                             Swal.fire(
                                 'Deleted!',
                                 'Your file has been deleted.',
@@ -116,7 +123,7 @@ const AllUsers = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((a, index) => <tr key={a._id} className="text-center hover">
+                            users?.map((a, index) => <tr key={a._id} className="text-center hover">
                                 <th>{index + 1}</th>
                                 <td>{a.name}</td>
                                 <td>{a.email}</td>

@@ -11,6 +11,7 @@ import StudentDashboard from "../pages/Dashboard/StudentDashboard/StudentDashboa
 import HomeDashBoard from "../pages/Dashboard/HomeDashboard/HomeDashboard";
 import AllUsers from "../pages/Dashboard/AdminDashBoard/AllUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
+import ManageClasses from "../pages/Dashboard/AdminDashBoard/ManageClasses";
 
 const Routes = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/dashboard/addClass',
                 element: <AddClass></AddClass>
+            },
+            {
+                path: '/dashboard/manageClasses',
+                element: <ManageClasses></ManageClasses>
             }
         ]
     }

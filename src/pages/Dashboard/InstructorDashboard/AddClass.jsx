@@ -1,24 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
 
 
-export const AddContext = createContext()
-
-const AddClass = ({ children }) => {
-    const { user } = useContext(AuthContext);
-    const [add, setAdd] = useState([]);
+const AddClass = () => {
+    const { user, add, setAdd } = useContext(AuthContext);
     console.log(add);
 
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data => {
-        setAdd([...add, data]);
+        setAdd(data);
         reset();
-        return (
-            <AddContext.Provider value={add}>
-                {children}
-            </AddContext.Provider>
-        )
     }
 
     return (
