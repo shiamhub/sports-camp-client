@@ -32,7 +32,7 @@ const ManageClasses = () => {
                     price,
                     className,
                     availableSeats,
-                    nid: id
+                    nid: id,
                 }
                 
                 axiosSecure.patch(`/newClasses/approved/${id}`)

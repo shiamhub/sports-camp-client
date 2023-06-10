@@ -16,6 +16,7 @@ const SelectedClasses = () => {
             return res.data;
         }
     })
+    console.log(addCart);
     const total = addCart?.reduce((sum, item) => item.price + sum, 0);
 
     const handleDelete = (id) => {

@@ -18,6 +18,7 @@ const ClassesHome = () => {
             email: user?.email,
             cartId: a._id
         }
+        console.log(addItem);
         fetch('http://localhost:5000/addCart', {
             method: 'POST',
             headers: {
