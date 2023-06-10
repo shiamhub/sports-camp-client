@@ -64,8 +64,8 @@ const ManageClasses = () => {
     }
 
     return (
-        <div className="grid grid-cols-2 gap-5 w-full">
-            {
+        <div className="w-full">
+            {/* {
                 classes?.map(a => <div key={a._id} className="card w-96 bg-base-100 shadow-xl">
                     <figure><img src={a.image} alt="Shoes" /></figure>
                     <div className="card-body">
@@ -81,7 +81,7 @@ const ManageClasses = () => {
                     </div>
                 </div>
                 )
-            }
+            } */}
             {/* {
                 classes?.map(a => <div key={a._id} className="card lg:card-side bg-base-100 shadow-xl mt-12">
                     <figure><img src={a.image} alt="Album" /></figure>
@@ -100,7 +100,7 @@ const ManageClasses = () => {
                 )
             } */}
 
-            {/* <div className="overflow-x-auto">
+            <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
                         <tr className="text-center">
@@ -138,11 +138,11 @@ const ManageClasses = () => {
                                         <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
                                     </div>
                                 </td>
-                            </tr>
-                            )}
+                            </tr>)
+                        }
                     </tbody>
                 </table>
-            </div> */}
+            </div>
         </div>
     );
 };

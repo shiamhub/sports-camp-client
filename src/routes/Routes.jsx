@@ -6,7 +6,6 @@ import ClassesHome from "../pages/Classes/ClassesHome";
 import InstructorsHome from "../pages/Instructors/InstructorsHome";
 import Login from "../authentication/Login";
 import SignUp from "../authentication/SignUp";
-import PrivateRoute from "./PrivateRoute";
 import HomeDashBoard from "../pages/Dashboard/HomeDashboard/HomeDashboard";
 import AllUsers from "../pages/Dashboard/AdminDashBoard/AllUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
@@ -17,6 +16,7 @@ import PaymentClasses from "../pages/Dashboard/StudentDashboard/PaymentClasses";
 import PaymentHistory from "../pages/Dashboard/StudentDashboard/PaymentHistory";
 import InstructorsRoute from "./InstructorsRoute";
 import StudentRoute from "./StudentRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const Routes = createBrowserRouter([
     {
@@ -30,11 +30,11 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/classes',
-                element: <PrivateRoute><ClassesHome></ClassesHome></PrivateRoute> 
+                element: <ClassesHome></ClassesHome>
             },
             {
                 path: '/instructors',
-                element: <PrivateRoute><InstructorsHome></InstructorsHome></PrivateRoute>
+                element: <InstructorsHome></InstructorsHome>
             },
             {
                 path: '/login',
@@ -48,7 +48,7 @@ const Routes = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <HomeDashBoard></HomeDashBoard>,
+        element: <PrivateRoute><HomeDashBoard></HomeDashBoard></PrivateRoute>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {

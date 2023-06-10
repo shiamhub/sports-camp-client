@@ -30,7 +30,7 @@ const SelectedClasses = () => {
 
     return (
         <div className="w-10/12">
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
                 <p>Total: {total}</p>
                 <Link to="/dashboard/paymentClasses" className="btn btn-primary">Pay</Link>
             </div>

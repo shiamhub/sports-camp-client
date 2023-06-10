@@ -12,6 +12,11 @@ const PaymentHistory = () => {
                 setHistory(res.data);
             })
     }, [axiosSecure]);
+
+    const handleDelete = (id) => {
+        console.log(id);
+    }
+
     return (
         <div className="w-10/12">
                 {

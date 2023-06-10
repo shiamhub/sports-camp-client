@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const ClassesHome = () => {
     const [classes, setClasses] = useState([]);
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
     useEffect(() => {
         fetch('http://localhost:5000/class')
             .then(res => res.json())
@@ -11,27 +14,31 @@ const ClassesHome = () => {
     }, [])
 
     const handleAddToCart = (a) => {
-        const addItem = {
-            className: a.class,
-            price: a.price,
-            insName: a.insName,
-            email: user?.email,
-            cartId: a._id
+        if(user) {
+            const addItem = {
+                className: a.className,
+                price: a.price,
+                instructorName: a.instructorName,
+                email: user?.email,
+                cartId: a._id
+            }
+            console.log(addItem);
+            fetch('http://localhost:5000/addCart', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(addItem)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+        } else {
+            navigate('/login');
         }
-        console.log(addItem);
-        fetch('http://localhost:5000/addCart', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(addItem)
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
     }
 
     return (
-        <div className="w-10/12 mx-auto">
+        <div className="w-10/12 mx-auto grid grid-cols-2 gap-5 mb-28 mt-10">
             {
                 classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set === 0) ? "bg-red-500 text-white" : "bg-base-100"} shadow-xl mt-12`}>
                     <figure><img className="w-[500px]" src={a.image} alt="Album" /></figure>
