@@ -19,7 +19,10 @@ const HomeDashBoard = () => {
                         <li><NavLink to="/dashboard/allUsers">Manage Users</NavLink></li>
                         <li><NavLink to="/dashboard/manageClasses">Manage Classes</NavLink></li>
                     </>}
-                    {role?.role === "instructor" && <li><NavLink to="/dashboard/addClass">Add A Class</NavLink></li>}
+                    {role?.role === "instructor" && <>
+                        <li><NavLink to="/dashboard/addClass">Add A Class</NavLink></li>
+                        <li><NavLink to="/dashboard/myClasses">My Classes</NavLink></li>
+                    </>}
                     {role?.role === "student" && <>
                         <li><NavLink to="/dashboard/selectedClasses">My Selected Classes</NavLink></li>
                         <li><NavLink to="/dashboard/enrolledClasses">My Enrolled Classes</NavLink></li>

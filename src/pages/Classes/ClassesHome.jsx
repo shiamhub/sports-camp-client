@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ClassesHome = () => {
     const [classes, setClasses] = useState([]);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         fetch('http://localhost:5000/class')
@@ -33,7 +35,18 @@ const ClassesHome = () => {
                 .then(res => res.json())
                 .then(data => console.log(data))
         } else {
-            navigate('/login');
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login now!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate("/login", {state: {from: location}});
+                }
+            })
         }
     }
 
