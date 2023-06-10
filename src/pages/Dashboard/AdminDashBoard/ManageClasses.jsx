@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 const ManageClasses = () => {
-    const { loading, setApproved } = useContext(AuthContext);
-    
+    const { loading } = useContext(AuthContext);
+
     const [axiosSecure] = useAxiosSecure();
-    const [newData, setNewData] = useState({});
 
     const { data: classes, refetch } = useQuery({
         queryKey: ["newClasses"],
@@ -18,14 +17,44 @@ const ManageClasses = () => {
         }
     })
 
+
     const handleApproved = (id) => {
         console.log(id);
         axiosSecure.get(`/newClasses/${id}`)
             .then(res => {
-                setNewData(res.data);
-                newData.nid = id;
-                setApproved('Approved');
-                axiosSecure.post('/newClasses/approved', newData)
+                const newData = res.data;
+                console.log(res.data)
+                const { image, instructorName, instructorEmail, price, className, availableSeats } = newData;
+                const newClasses = {
+                    image,
+                    instructorName,
+                    instructorEmail,
+                    price,
+                    className,
+                    availableSeats,
+                    nid: id
+                }
+                
+                axiosSecure.patch(`/newClasses/approved/${id}`)
+                .then(res => {
+                    console.log(res.data);
+                    console.log(newClasses)
+                        axiosSecure.post('/classes/approved', newClasses)
+                            .then(res => {
+                                refetch();
+                                console.log(res.data);
+                            })
+                    })
+
+            })
+
+    }
+    const handleDenied = (id) => {
+        console.log(id);
+        axiosSecure.patch(`/newClasses/denied/${id}`)
+            .then(res => {
+                console.log(res.data);
+                axiosSecure.delete(`/newClasses/denied/${id}`)
                     .then(res => {
                         refetch();
                         console.log(res.data);
@@ -33,19 +62,10 @@ const ManageClasses = () => {
             })
 
     }
-    const handleDenied = (id) => {
-        console.log(id);
-        axiosSecure.delete(`/newClasses/denied/${id}`)
-            .then(res => {
-                newData.status = 'Denied';
-                refetch();
-                console.log(res.data);
-            })
-
-    }
 
     return (
         <div className="w-full">
+            
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>

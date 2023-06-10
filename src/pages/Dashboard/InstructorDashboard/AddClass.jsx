@@ -6,8 +6,7 @@ import Swal from "sweetalert2";
 
 
 const AddClass = () => {
-    const { user, approved } = useContext(AuthContext);
-    console.log(approved)
+    const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
     const imagesHosting = import.meta.env.VITE_IMAGE_UPLOAD_URL;
@@ -18,15 +17,17 @@ const AddClass = () => {
     const onSubmit = data => {
         const fromData = new FormData();
         fromData.append("image", data.image[0]);
+        console.log(fromData)
 
         fetch(imageURl, {
             method: "POST",
             body: fromData
         })
             .then(res => res.json())
-            .then(imData => {
-                if(imData.success){
-                    const imgURL = imData.data.display_url;
+            .then(inData => {
+                console.log(inData)
+                if(inData.success){
+                    const imgURL = inData.data.display_url;
                     const { price, className, availableSeats } = data;
                     const newClasses = {
                         image: imgURL,
@@ -35,10 +36,11 @@ const AddClass = () => {
                         price: parseFloat(price),
                         className,
                         availableSeats,
-                        status: approved === 'Approved' ? "Approved" : "pending"
+                        status: "pending"
                     }
                     axiosSecure.post("/newClasses", newClasses)
                         .then(res => {
+                            console.log(res.data)
                             if (res.data.acknowledged) {
                                 Swal.fire({
                                     icon: 'success',
@@ -49,11 +51,8 @@ const AddClass = () => {
 
                             }
                         })
-                    
                 }
             })
-
-        // reset();
     }
 
     return (

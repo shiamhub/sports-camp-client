@@ -16,6 +16,7 @@ const ClassesHome = () => {
             price: a.price,
             insName: a.insName,
             email: user?.email,
+            cartId: a._id
         }
         fetch('http://localhost:5000/addCart', {
             method: 'POST',
@@ -31,16 +32,15 @@ const ClassesHome = () => {
     return (
         <div className="w-10/12 mx-auto">
             {
-                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set - a.students) ? "bg-base-100" : "bg-red-500 text-white"} shadow-xl mt-12`}>
+                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set === 0) ? "bg-red-500 text-white" : "bg-base-100"} shadow-xl mt-12`}>
                     <figure><img className="w-[500px]" src={a.image} alt="Album" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">{a.class}</h2>
                         <p>Instructor name: {a.insName}</p>
-                        <p>Students: {a.students}</p>
                         <p>Available seats: {a.set}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => handleAddToCart(a)} disabled={!(a.set - a.students)} className="btn btn-primary">Add to cart</button>
+                            <button onClick={() => handleAddToCart(a)} disabled={(a.set === 0)} className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>

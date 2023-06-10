@@ -7,11 +7,13 @@ import InstructorsHome from "../pages/Instructors/InstructorsHome";
 import Login from "../authentication/Login";
 import SignUp from "../authentication/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import StudentDashboard from "../pages/Dashboard/StudentDashboard/StudentDashboard";
 import HomeDashBoard from "../pages/Dashboard/HomeDashboard/HomeDashboard";
 import AllUsers from "../pages/Dashboard/AdminDashBoard/AllUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass";
 import ManageClasses from "../pages/Dashboard/AdminDashBoard/ManageClasses";
+import SelectedClasses from "../pages/Dashboard/StudentDashboard/SelectedClasses";
+import EnrolledClasses from "../pages/Dashboard/StudentDashboard/EnrolledClasses";
+import PaymentClasses from "../pages/Dashboard/StudentDashboard/PaymentClasses";
 
 const Routes = createBrowserRouter([
     {
@@ -51,8 +53,12 @@ const Routes = createBrowserRouter([
                 element: <AllUsers></AllUsers>
             },
             {
-                path: '/dashboard/studentDashboard',
-                element: <StudentDashboard></StudentDashboard>
+                path: '/dashboard/selectedClasses',
+                element: <SelectedClasses></SelectedClasses>
+            },
+            {
+                path: '/dashboard/enrolledClasses',
+                element: <EnrolledClasses></EnrolledClasses>
             },
             {
                 path: '/dashboard/addClass',
@@ -61,6 +67,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/dashboard/manageClasses',
                 element: <ManageClasses></ManageClasses>
+            },
+            {
+                path: '/dashboard/paymentClasses',
+                element: <PaymentClasses></PaymentClasses>
             }
         ]
     }
