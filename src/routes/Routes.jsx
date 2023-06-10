@@ -30,7 +30,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/classes',
-                element: <ClassesHome></ClassesHome>
+                element: <PrivateRoute><ClassesHome></ClassesHome></PrivateRoute> 
             },
             {
                 path: '/instructors',

@@ -14,7 +14,7 @@ const Instructors = () => {
             <div className="grid grid-cols-4 gap-4 my-8">
                 {
                     instructors.map(a => <div key={a._id} className="bg-base-100 shadow-xl">
-                        <figure><img src={a.insImage} alt="Movie" /></figure>
+                        <figure><img src={a.instructorImage} alt="Movie" /></figure>
                     </div>)
                 }
             </div>

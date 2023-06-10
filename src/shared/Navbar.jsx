@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
+import useRole from "../hooks/useRole";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [role] = useRole();
     const handleLogOut = () => {
         logOut()
             .then(() => {
@@ -18,7 +20,13 @@ const Navbar = () => {
         <li><Link to="/classes">Classes</Link></li>
         <li><Link to="/instructors">Instructors</Link></li>
         {
-            user && <li><Link to="/dashboard">Dashboard</Link></li>
+            (user && role?.role === "admin") &&  <li><Link to="/dashboard/allUsers">Dashboard</Link></li>
+        }
+        {
+            (user && role?.role === "instructor") &&  <li><Link to="/dashboard/addClass">Dashboard</Link></li>
+        }
+        {
+            (user && role?.role === "student") &&  <li><Link to="/dashboard/selectedClasses">Dashboard</Link></li>
         }
     </>
     return (

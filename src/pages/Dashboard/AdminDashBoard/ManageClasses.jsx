@@ -34,11 +34,11 @@ const ManageClasses = () => {
                     availableSeats,
                     nid: id,
                 }
-                
+
                 axiosSecure.patch(`/newClasses/approved/${id}`)
-                .then(res => {
-                    console.log(res.data);
-                    console.log(newClasses)
+                    .then(res => {
+                        console.log(res.data);
+                        console.log(newClasses)
                         axiosSecure.post('/classes/approved', newClasses)
                             .then(res => {
                                 refetch();
@@ -64,9 +64,43 @@ const ManageClasses = () => {
     }
 
     return (
-        <div className="w-full">
-            
-            <div className="overflow-x-auto">
+        <div className="grid grid-cols-2 gap-5 w-full">
+            {
+                classes?.map(a => <div key={a._id} className="card w-96 bg-base-100 shadow-xl">
+                    <figure><img src={a.image} alt="Shoes" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{a.className}</h2>
+                        <p>{a.instructorName}</p>
+                        <p>{a.availableSeats}</p>
+                        <p>{a.price}</p>
+                        <p>{a.status}</p>
+                        <div className="card-actions justify-end">
+                            <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white">Approved</button>
+                            <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
+                        </div>
+                    </div>
+                </div>
+                )
+            }
+            {/* {
+                classes?.map(a => <div key={a._id} className="card lg:card-side bg-base-100 shadow-xl mt-12">
+                    <figure><img src={a.image} alt="Album" /></figure>
+                    <div className="card-body">
+                        <h2 className="card-title">{a.className}</h2>
+                        <p>{a.instructorName}</p>
+                        <p>{a.availableSeats}</p>
+                        <p>{a.price}</p>
+                        <p>{a.status}</p>
+                        <div className="card-actions justify-end">
+                            <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white">Approved</button>
+                            <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
+                        </div>
+                    </div>
+                </div>
+                )
+            } */}
+
+            {/* <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
                         <tr className="text-center">
@@ -108,7 +142,7 @@ const ManageClasses = () => {
                             )}
                     </tbody>
                 </table>
-            </div>
+            </div> */}
         </div>
     );
 };

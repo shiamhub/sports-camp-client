@@ -36,9 +36,10 @@ const ClassesHome = () => {
                 classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set === 0) ? "bg-red-500 text-white" : "bg-base-100"} shadow-xl mt-12`}>
                     <figure><img className="w-[500px]" src={a.image} alt="Album" /></figure>
                     <div className="card-body">
-                        <h2 className="card-title">{a.class}</h2>
-                        <p>Instructor name: {a.insName}</p>
-                        <p>Available seats: {a.set}</p>
+                        <h2 className="card-title">{a.className}</h2>
+                        <p>Instructor name: {a.instructorName}</p>
+                        <p>Instructor Email: {a.instructorEmail}</p>
+                        <p>Available seats: {a.availableSeats}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
                             <button onClick={() => handleAddToCart(a)} disabled={(a.set === 0)} className="btn btn-primary">Add to cart</button>
