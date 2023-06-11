@@ -24,10 +24,11 @@ const ManageClasses = () => {
             .then(res => {
                 const newData = res.data;
                 console.log(res.data)
-                const { image, instructorName, instructorEmail, price, className, availableSeats } = newData;
+                const { image, instructorName, instructorImage, instructorEmail, price, className, availableSeats } = newData;
                 const newClasses = {
                     image,
                     instructorName,
+                    instructorImage,
                     instructorEmail,
                     price,
                     className,

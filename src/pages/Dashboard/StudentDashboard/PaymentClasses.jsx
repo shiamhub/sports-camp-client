@@ -9,26 +9,38 @@ import { AuthContext } from "../../../providers/AuthProvider";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const PaymentClasses = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { id , loading } = useContext(AuthContext);
+
     const [axiosSecure] = useAxiosSecure();
     const { data: addCart } = useQuery({
-        queryKey: ["addCart", user?.email],
+        queryKey: ["addCart", id],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/addCart?email=${user?.email}`);
+            const res = await axiosSecure.get(`/addCart/${id}`);
             return res.data;
         }
     })
+    // const [axiosSecure] = useAxiosSecure();
+    // const { data: addCart } = useQuery({
+    //     queryKey: ["addCart", id],
+    //     enabled: !loading,
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get(`/addCart?email=${user?.email}`);
+    //         return res.data;
+    //     }
+    // })
+    // console.log(addCart.price);
+    // const total = addCart.price;
+    // console.log(total);
     
-    const total = addCart?.reduce((sum, item) => item.price + sum, 0);
-
+    // const total = addCart?.reduce((sum, item) => item.price + sum, 0);
     // const price = parseFloat(total.toFixed(2));
     // console.log(price);
 
     return (
         <div className="w-full">
             <Elements stripe={stripePromise}>
-                <PaymentSystem price={total} addCart={addCart}></PaymentSystem>
+                <PaymentSystem price={addCart?.price} addCart={addCart}></PaymentSystem>
             </Elements>
         </div>
     );

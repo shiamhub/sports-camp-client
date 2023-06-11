@@ -22,7 +22,7 @@ const ClassesHome = () => {
                 price: a.price,
                 instructorName: a.instructorName,
                 email: user?.email,
-                cartId: a._id
+                cartId: a._id,
             }
             console.log(addItem);
             fetch('https://assignment-12-server-shiamhub.vercel.app/addCart', {

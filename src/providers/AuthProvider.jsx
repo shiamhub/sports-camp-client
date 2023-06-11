@@ -9,7 +9,8 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [approved, setApproved] = useState('Approved');
+    const [id, setId] = useState('');
+
     const signUp = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const authInfo = {
-        googleLogin, login, signUp, logOut, user, updateUserProfile, loading, approved, setApproved
+        googleLogin, login, signUp, logOut, user, updateUserProfile, loading, id, setId
     }
 
     return (

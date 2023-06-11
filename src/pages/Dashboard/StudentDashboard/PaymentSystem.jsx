@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const PaymentSystem = ({price, addCart}) => {
+    console.log(price)
 
     const { user } = useContext(AuthContext);
     const stripe = useStripe();
@@ -81,10 +82,13 @@ const PaymentSystem = ({price, addCart}) => {
                 date: new Date(),
                 quantity: addCart.length,
                 status: 'Processing',
-                cartItems: addCart.map(cart => cart._id),
-                addCartItems: addCart.map(cart => cart.cartId),
-                // itemNames: addCart.map(cart => cart.payments),
+                
+                cartItems: addCart._id,
+                addCartItems: addCart.cartId,
+                // cartItems: addCart?.map(cart => cart._id),
+                // addCartItems: addCart?.map(cart => cart.cartId),
             }
+            
             axiosSecure.post("/payments", payment)
             .then((res) => {
                 console.log(res.data);

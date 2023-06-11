@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, setId } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
     const { data: addCart, refetch } = useQuery({
@@ -16,8 +16,13 @@ const SelectedClasses = () => {
             return res.data;
         }
     })
-    console.log(addCart);
+
     const total = addCart?.reduce((sum, item) => item.price + sum, 0);
+
+    const handlePayment = (id) => {
+        console.log(id)
+        setId(id)
+    }
 
     const handleDelete = (id) => {
         console.log(id);
@@ -54,7 +59,7 @@ const SelectedClasses = () => {
                                     <td>{a.className}</td>
                                     <td>{a.email}</td>
                                     <td>{a.price}</td>
-                                    <td><button className="btn btn-primary btn-sm text-white">View Details</button></td>
+                                    <td><Link to="/dashboard/paymentClasses" onClick={() => handlePayment(a._id)} className="btn btn-primary">Pay</Link></td>
                                     <td><button onClick={() => handleDelete(a._id)} className="btn btn-error btn-sm text-white">Delete</button></td>
                                 </tr>
                                 )}
@@ -62,6 +67,7 @@ const SelectedClasses = () => {
                     </table>
                 }
             </div>
+            
         </div>
     );
 };

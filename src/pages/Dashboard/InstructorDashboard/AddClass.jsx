@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -8,12 +8,11 @@ import Swal from "sweetalert2";
 const AddClass = () => {
     const { user } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
-    const [url, setUrl] = useState("");
+    // const [url, setUrl] = useState("");
 
     const imagesHosting = import.meta.env.VITE_IMAGE_UPLOAD_URL;
 
     const imageURl = `https://api.imgbb.com/1/upload?key=${imagesHosting}`
-    const imageURl2 = `https://api.imgbb.com/1/upload?key=${imagesHosting}`
 
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
@@ -30,13 +29,15 @@ const AddClass = () => {
             .then(fromData => {
                 console.log(fromData)
                 if (fromData.success) {
-                    setUrl(fromData.data.display_url);
+                    // setUrl(fromData.data.display_url);
                     console.log(fromData.data.display_url)
+                    var url = fromData.data.display_url
 
                     const fromDataIns = new FormData();
-                    fromDataIns.append("instructorImage", data.instructorImage[0]);
+                    fromDataIns.append("image", data.instructorImage[0]);
                     console.log(fromDataIns)
-                    fetch(imageURl2, {
+                    
+                    fetch(imageURl, {
                         method: "POST",
                         body: fromDataIns
                     })
@@ -45,7 +46,7 @@ const AddClass = () => {
                             if (fromDataIns.success) {
                                 console.log(fromDataIns)
                                 const imgURL = fromDataIns.data.display_url;
-                                console.log(url)
+                                console.log(imgURL)
                                 const { price, className, availableSeats } = data;
                                 const newClasses = {
                                     image: url,

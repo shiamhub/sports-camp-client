@@ -22,7 +22,7 @@ const HomeDashBoard = () => {
                 {!isLoading && <ul className="menu p-4 w-80 h-full bg-base-300 text-base-content">
                     <img className="px-8 pt-4" src={logo} alt="" />
                     <h1 className="text-3xl font-bold text-blue-800 text-center">Sports Camp</h1>
-                    <div className="avatar items-center gap-3 mt-5 bg-slate-300 px-6 py-4 border-2 border-blue-800 rounded-lg mx-auto">
+                    <div className="avatar items-center gap-3 mt-5 dark:bg-slate-300 bg-slate-300 px-6 py-4 border-2 border-blue-800 rounded-lg mx-auto">
                         <div className="w-10 rounded">
                             <img src={user?.photoURL} alt="Tailwind-CSS-Avatar-component" />
                         </div>
