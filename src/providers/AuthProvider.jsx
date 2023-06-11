@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
             if(user) {
-                axios.post("http://localhost:5000/jwt", { email: user.email })
+                axios.post("https://assignment-12-server-shiamhub.vercel.app/jwt", { email: user.email })
                 .then(res => {
                     localStorage.setItem("access-token", res.data.token);
                     setLoading(false);
