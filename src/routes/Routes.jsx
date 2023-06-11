@@ -18,6 +18,7 @@ import InstructorsRoute from "./InstructorsRoute";
 import StudentRoute from "./StudentRoute";
 import PrivateRoute from "./PrivateRoute";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses";
+import Feedback from "../pages/Dashboard/InstructorDashboard/Feedback";
 
 const Routes = createBrowserRouter([
     {
@@ -83,6 +84,10 @@ const Routes = createBrowserRouter([
             {
                 path: '/dashboard/myClasses',
                 element: <InstructorsRoute><MyClasses></MyClasses></InstructorsRoute>
+            },
+            {
+                path: '/dashboard/feedback',
+                element: <InstructorsRoute><Feedback></Feedback></InstructorsRoute>
             }
         ]
     }

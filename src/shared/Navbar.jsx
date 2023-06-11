@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
 import useRole from "../hooks/useRole";
+import logo from "./../assets/images/00a44425450365.563458fea527b.png"
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -32,7 +33,11 @@ const Navbar = () => {
     return (
         <div className="bg-base-300">
             <div className="navbar lg:w-5/6 mx-auto">
-                <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                {/* <a className="btn btn-ghost normal-case text-xl"></a> */}
+                <div className="flex flex-col items-center">
+                    <img className="w-20" src={logo} alt="" />
+                    <h3 className="w-24 font-medium text-sm text-center text-blue-900">Sports Camp</h3>
+                </div>
                 <div className="navbar-end w-full">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -54,8 +59,8 @@ const Navbar = () => {
                         user ? <>
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
 
-                                <div title={user.displayName} className="w-10 rounded-full">
-                                    <img src={user.photoURL} />
+                                <div title={user?.displayName} className="w-10 rounded-full">
+                                    <img src={user?.photoURL} />
                                 </div>
 
                             </label>
