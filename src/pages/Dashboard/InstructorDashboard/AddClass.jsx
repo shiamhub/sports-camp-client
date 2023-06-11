@@ -31,7 +31,7 @@ const AddClass = () => {
                 if (fromData.success) {
                     // setUrl(fromData.data.display_url);
                     console.log(fromData.data.display_url)
-                    var url = fromData.data.display_url
+                    let url = fromData.data.display_url
 
                     const fromDataIns = new FormData();
                     fromDataIns.append("image", data.instructorImage[0]);
@@ -55,7 +55,7 @@ const AddClass = () => {
                                     instructorEmail: user?.email,
                                     price: parseFloat(price),
                                     className,
-                                    availableSeats,
+                                    availableSeats: parseInt(availableSeats),
                                     status: "pending"
                                 }
                                 axiosSecure.post("/newClasses", newClasses)

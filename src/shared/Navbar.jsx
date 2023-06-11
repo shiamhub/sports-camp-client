@@ -7,6 +7,7 @@ import logo from "./../assets/images/00a44425450365.563458fea527b.png"
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [role] = useRole();
+    console.log(role?.role)
     const [theme, setTheme] = useState(localStorage.getItem("theme") ? localStorage.getItem("theme") : "light");
 
     const handleToggle = () => {

@@ -31,7 +31,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, Instructor it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/instructor/${id}`, {
+                fetch(`http://localhost:5000/user/instructor/${id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())
@@ -61,7 +61,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/admin/${id}`, {
+                fetch(`http://localhost:5000/user/admin/${id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())

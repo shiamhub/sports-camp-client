@@ -10,7 +10,7 @@ const ClassesHome = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch('https://assignment-12-server-shiamhub.vercel.app/class')
+        fetch('http://localhost:5000/class')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [])
@@ -25,7 +25,7 @@ const ClassesHome = () => {
                 cartId: a._id,
             }
             console.log(addItem);
-            fetch('https://assignment-12-server-shiamhub.vercel.app/addCart', {
+            fetch('http://localhost:5000/addCart', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -53,7 +53,7 @@ const ClassesHome = () => {
     return (
         <div className="w-10/12 mx-auto grid grid-cols-2 gap-5 mb-28 mt-10">
             {
-                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.set === 0) ? "bg-red-500 text-white" : "bg-base-100"} shadow-xl mt-12`}>
+                classes.map(a => <div key={a._id} className={`card lg:card-side ${(a.availableSeats === 0) ? "bg-red-500 text-white" : "bg-base-100"} shadow-xl mt-12`}>
                     <figure><img className="w-[500px]" src={a.image} alt="Album" /></figure>
                     <div className="card-body">
                         <h2 className="card-title">{a.className}</h2>
@@ -62,7 +62,7 @@ const ClassesHome = () => {
                         <p>Available seats: {a.availableSeats}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => handleAddToCart(a)} disabled={(a.set === 0)} className="btn btn-primary">Add to cart</button>
+                            <button onClick={() => handleAddToCart(a)} disabled={(a.availableSeats === 0)} className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,7 @@ import { useContext } from "react";
 const HomeDashBoard = () => {
     const { user } = useContext(AuthContext);
     const [role, isLoading] = useRole();
+    console.log(role?.role)
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

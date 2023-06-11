@@ -85,8 +85,7 @@ const PaymentSystem = ({price, addCart}) => {
                 
                 cartItems: addCart._id,
                 addCartItems: addCart.cartId,
-                // cartItems: addCart?.map(cart => cart._id),
-                // addCartItems: addCart?.map(cart => cart.cartId),
+                
             }
             
             axiosSecure.post("/payments", payment)

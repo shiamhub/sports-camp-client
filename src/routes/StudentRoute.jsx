@@ -7,6 +7,9 @@ const StudentRoute = ({children}) => {
     const [role, isLoading] = useRole();
     const location = useLocation();
 
+    console.log(role?.role)
+
+
     if(loading || isLoading) {
         return <div>Loading...</div>
     }
