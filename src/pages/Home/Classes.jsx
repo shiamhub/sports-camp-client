@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Zoom } from "react-awesome-reveal";
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
@@ -13,7 +14,7 @@ const Classes = () => {
             <div className="grid lg:grid-cols-3 grid-cols-2 gap-4 lg:my-8 mt-5">
             {
                 classes?.slice(0, 6).map(a => <div key={a._id} className="bg-base-100 shadow-xl rounded-xl">
-                    <figure><img className="w-[500px] rounded-xl" src={a.image} alt="Album" /></figure>
+                    <figure><Zoom duration={1500}><img className="w-[500px] rounded-xl" src={a.image} alt="Album" /></Zoom></figure>
                     
                 </div>
                 )

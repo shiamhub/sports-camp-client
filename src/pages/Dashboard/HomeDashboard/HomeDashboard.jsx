@@ -1,9 +1,10 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useRole from "../../../hooks/useRole";
 import logo from "./../../../assets/images/00a44425450365.563458fea527b.png";
-import { FcHome } from 'react-icons/fc';
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
+import { FcHome } from 'react-icons/fc';
+import { BsJournalBookmarkFill } from 'react-icons/bs';
 
 const HomeDashBoard = () => {
     const { user } = useContext(AuthContext);
@@ -45,7 +46,7 @@ const HomeDashBoard = () => {
                         <li><NavLink to="/dashboard/feedback">Feedback</NavLink></li>
                     </>}
                     {role?.role === "student" && <>
-                        <li><NavLink to="/dashboard/selectedClasses">My Selected Classes</NavLink></li>
+                        <li><NavLink to="/dashboard/selectedClasses"><BsJournalBookmarkFill className="text-2xl"></BsJournalBookmarkFill>My Selected Classes</NavLink></li>
                         <li><NavLink to="/dashboard/enrolledClasses">My Enrolled Classes</NavLink></li>
                         <li><NavLink to="/dashboard/paymentClasses">Payment Classes</NavLink></li>
                         <li><NavLink to="/dashboard/paymentHistory">Payment History</NavLink></li>

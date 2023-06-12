@@ -1,4 +1,5 @@
 Website name is Sports Camp.
+Website logo---
 - ![WebsiteLog](https://i.ibb.co/TWcM54t/00a44425450365-563458fea527b.png)
 
 Live-link: https://assignment-12-5c7be.web.app/
@@ -33,3 +34,4 @@ Used packages:
     10.react-toastify
     11.sweetalert2
     12.swiper
+    13.react-awesome-reveal
