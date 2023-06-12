@@ -19,7 +19,7 @@ const SignUp = () => {
                     updateUserProfile(data.name, data.photoURL)
                         .then(() => {
                             const savedUser = {name: data.name, email: data.email, role: 'student'};
-                            fetch('http://localhost:5000/users', {
+                            fetch('https://assignment-12-server-shiamhub.vercel.app/users', {
                                 method: 'POST',
                                 headers: {
                                     'content-type': 'application/json'

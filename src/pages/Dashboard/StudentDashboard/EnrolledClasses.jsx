@@ -24,10 +24,10 @@ const EnrolledClasses = () => {
                             <tr className="text-center">
                                 <th>#</th>
                                 <th>Class Name</th>
+                                <th>Instructor Name</th>
                                 <th>Email</th>
                                 <th>Price</th>
                                 <th>Details</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,10 +35,10 @@ const EnrolledClasses = () => {
                                 enroll?.result?.map((a, index) => <tr key={a._id} className="text-center hover">
                                     <th>{index + 1}</th>
                                     <th>{a.className}</th>
+                                    <th>{a.instructorName}</th>
                                     <td>{a.instructorEmail}</td>
                                     <td>{a.price}</td>
                                     <td><button className="btn btn-primary btn-sm text-white">View Details</button></td>
-                                    <td><button className="btn btn-error btn-sm text-white">Delete</button></td>
                                 </tr>
                                 )}
                         </tbody>
