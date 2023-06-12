@@ -10,7 +10,7 @@ const ClassesHome = () => {
     const location = useLocation();
 
     useEffect(() => {
-        fetch('http://localhost:5000/class')
+        fetch('https://assignment-12-server-shiamhub.vercel.app/class')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [])
@@ -25,7 +25,7 @@ const ClassesHome = () => {
                 cartId: a._id,
             }
             console.log(addItem);
-            fetch('http://localhost:5000/addCart', {
+            fetch('https://assignment-12-server-shiamhub.vercel.app/addCart', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

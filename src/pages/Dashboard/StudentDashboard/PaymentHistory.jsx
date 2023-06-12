@@ -29,7 +29,7 @@ const PaymentHistory = () => {
                         <thead>
                             <tr className="text-center">
                                 <th>#</th>
-                                <th>Name</th>
+                                <th>TransactionId</th>
                                 {/* <th>Email</th> */}
                                 <th>Price</th>
                                 <th>Details</th>
@@ -38,9 +38,9 @@ const PaymentHistory = () => {
                         </thead>
                         <tbody>
                             {
-                                history?.map((a, index) => <tr key={a._id} className="text-center hover">
+                                history?.inResult?.map((a, index) => <tr key={a._id} className="text-center hover">
                                     <th>{index + 1}</th>
-                                    <td>{a.instructorName}</td>
+                                    <td>{a.transactionId}</td>
                                     {/* <td>{a.instructorEmail}</td> */}
                                     <td>{a.price}</td>
                                     <td><button className="btn btn-primary btn-sm text-white">View Details</button></td>

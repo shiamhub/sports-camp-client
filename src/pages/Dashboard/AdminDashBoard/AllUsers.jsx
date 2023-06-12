@@ -31,7 +31,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, Instructor it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/user/instructor/${id}`, {
+                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/instructor/${id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())
@@ -61,7 +61,7 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/user/admin/${id}`, {
+                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/admin/${id}`, {
                     method: 'PATCH'
                 })
                     .then(res => res.json())
@@ -118,6 +118,7 @@ const AllUsers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th>Set Role</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
@@ -127,6 +128,7 @@ const AllUsers = () => {
                                 <th>{index + 1}</th>
                                 <td>{a.name}</td>
                                 <td>{a.email}</td>
+                                <td>{a.role}</td>
                                 <td>
                                     {
                                         a.role === 'instructor' ? <span className="mx-8">Instructor</span> : <button onClick={() => handleInstructor(a._id)} className="btn btn-primary btn-sm mx-8">Instructor</button>

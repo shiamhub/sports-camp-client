@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 const ManageClasses = () => {
     const { loading } = useContext(AuthContext);
-
     const [axiosSecure] = useAxiosSecure();
+    const [text, setText] = useState("");
+    const [denied, setDenied] = useState({});
 
     const { data: classes, refetch } = useQuery({
         queryKey: ["newClasses"],
@@ -16,7 +17,6 @@ const ManageClasses = () => {
             return res.data;
         }
     })
-
 
     const handleApproved = (id) => {
         console.log(id);
@@ -50,57 +50,51 @@ const ManageClasses = () => {
             })
 
     }
-    const handleDenied = (id) => {
-        console.log(id);
-        axiosSecure.patch(`/newClasses/denied/${id}`)
+    // const handleDenied = (id) => {
+    //     console.log(id);
+    //     axiosSecure.patch(`/newClasses/denied/${id}`)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             axiosSecure.delete(`/newClasses/denied/${id}`)
+    //                 .then(res => {
+    //                     refetch();
+    //                     console.log(res.data);
+    //                 })
+    //         })
+
+    // }
+    const handleDeniedFe = (id) => {
+        setDenied(id)
+        window.my_modal_3.showModal()
+    }
+
+    const handleFeed = () => {
+        const { image, instructorName, instructorImage, instructorEmail, price, className, availableSeats } = denied;
+        const newDenied = {
+            image,
+            instructorName,
+            instructorImage,
+            instructorEmail,
+            price,
+            className,
+            availableSeats,
+            feedBack: text,
+            status: "denied"            
+        }
+        axiosSecure.put(`/newClasses/denied/${denied._id}`, newDenied)
             .then(res => {
                 console.log(res.data);
-                axiosSecure.delete(`/newClasses/denied/${id}`)
+                axiosSecure.delete(`/newClasses/denied/${denied._id}`)
                     .then(res => {
                         refetch();
                         console.log(res.data);
                     })
             })
-
     }
+
 
     return (
         <div className="w-full">
-            {/* {
-                classes?.map(a => <div key={a._id} className="card w-96 bg-base-100 shadow-xl">
-                    <figure><img src={a.image} alt="Shoes" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">{a.className}</h2>
-                        <p>{a.instructorName}</p>
-                        <p>{a.availableSeats}</p>
-                        <p>{a.price}</p>
-                        <p>{a.status}</p>
-                        <div className="card-actions justify-end">
-                            <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white">Approved</button>
-                            <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
-                        </div>
-                    </div>
-                </div>
-                )
-            } */}
-            {/* {
-                classes?.map(a => <div key={a._id} className="card lg:card-side bg-base-100 shadow-xl mt-12">
-                    <figure><img src={a.image} alt="Album" /></figure>
-                    <div className="card-body">
-                        <h2 className="card-title">{a.className}</h2>
-                        <p>{a.instructorName}</p>
-                        <p>{a.availableSeats}</p>
-                        <p>{a.price}</p>
-                        <p>{a.status}</p>
-                        <div className="card-actions justify-end">
-                            <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white">Approved</button>
-                            <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
-                        </div>
-                    </div>
-                </div>
-                )
-            } */}
-
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
@@ -136,7 +130,12 @@ const ManageClasses = () => {
                                 <td>
                                     <div>
                                         <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white mr-5">Approved</button>
-                                        <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
+                                        <button onClick={() => handleDeniedFe(a)} className="btn btn-error btn-sm text-white">Denied</button>
+                                        {/* <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button> */}
+                                        {/* <button  className="btn btn-error btn-sm text-white" onClick={() => {
+                                            window.my_modal_3.showModal(),
+                                            () => handleDenied(a._id)
+                                        }}>Denied</button> */}
                                     </div>
                                 </td>
                             </tr>)
@@ -144,6 +143,17 @@ const ManageClasses = () => {
                     </tbody>
                 </table>
             </div>
+            {/* <button className="btn" onClick={()=>window.my_modal_3.showModal()}>open modal</button> */}
+            <dialog id="my_modal_3" className="modal">
+                <form method="dialog" className="modal-box">
+                    <button htmlFor="my-modal-3" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    <textarea onChange={(e) => setText(e.target.value)} className="textarea textarea-primary w-full" placeholder="Bio"></textarea>
+                    <div className="modal-action">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button onClick={() => handleFeed()} className="btn">Done</button>
+                    </div>
+                </form>
+            </dialog>
         </div>
     );
 };
