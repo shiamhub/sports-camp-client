@@ -14,7 +14,7 @@ const Instructors = () => {
 
             <div className="grid grid-cols-3 gap-4 my-8">
                 {
-                    instructors?.map(a => <div key={a._id} className="bg-base-100 rounded-xl shadow-xl">
+                    instructors?.slice(0, 6).map(a => <div key={a._id} className="bg-base-100 rounded-xl shadow-xl">
                         <figure><img className="rounded-xl" src={a?.instructorImage} alt="Movie" /></figure>
                     </div>)
                 }

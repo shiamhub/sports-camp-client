@@ -32,17 +32,17 @@ const Banner = () => {
             >
                 <SwiperSlide className='relative'><img className='opacity-60' src={img1} alt="" />
                     <h1 className="absolute top-4 lg:top-1/4 left-24 text-neutral flex mx-auto lg:text-7xl text-3xl font-bold text-center lg:mt-24 mt-6 lg:mb-12 z-30">Sports Camp</h1>
-                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve one's physical health.</p>
+                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve ones physical health.</p>
                 </SwiperSlide>
                 <SwiperSlide>
                     <img className='opacity-60' src={img2} alt="" />
                     <h1 className="absolute top-4 lg:top-1/4 left-24 text-neutral flex mx-auto lg:text-7xl text-3xl font-bold text-center lg:mt-24 mt-6 lg:mb-12 z-30">Sports Camp</h1>
-                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve one's physical health.</p>
+                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve ones physical health.</p>
 
                 </SwiperSlide>
                 <SwiperSlide><img className='opacity-60' src={img3} alt="" />
                 <h1 className="absolute top-4 lg:top-1/4 left-24 text-neutral flex mx-auto lg:text-7xl text-3xl font-bold text-center lg:mt-24 mt-6 lg:mb-12 z-30">Sports Camp</h1>
-                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve one's physical health.</p>
+                    <p className='absolute top-12 left-3 lg:top-1/4 lg:left-24 text-neutral flex mx-auto lg:text-3xl text-xs font-medium lg:text-start text-center lg:mt-44 mt-6 lg:mb-12 z-30'>Sport pertains to any form of competitive physical activity or game that aims to use, maintain or improve physical ability and skills while providing enjoyment to participants and, in some cases, entertainment to spectators. Sports can, through casual or organized participation, improve ones physical health.</p>
 
                 </SwiperSlide>
             </Swiper>

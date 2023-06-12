@@ -3,8 +3,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useRole from "../../hooks/useRole";
-// import { ToastContainer, toast } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css';
+
 
 const ClassesHome = () => {
     const [classes, setClasses] = useState([]);
@@ -20,7 +19,7 @@ const ClassesHome = () => {
     }, [])
 
     const handleAddToCart = (a) => {
-        if(user) {
+        if (user) {
             const addItem = {
                 className: a.className,
                 price: a.price,
@@ -38,8 +37,14 @@ const ClassesHome = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    // toast("Added to cart successfully");
-                    console.log(data)
+                    console.log(data);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                 })
         } else {
             Swal.fire({
@@ -51,7 +56,7 @@ const ClassesHome = () => {
                 confirmButtonText: 'Login now!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate("/login", {state: {from: location}});
+                    navigate("/login", { state: { from: location } });
                 }
             })
         }
@@ -69,14 +74,13 @@ const ClassesHome = () => {
                         <p>Available seats: {a.availableSeats}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => handleAddToCart(a)} disabled={role?.role === "instructor" || role?.role === "admin" || (a.availableSeats === 0) } className="btn btn-primary">Add to cart</button>
+                            <button onClick={() => handleAddToCart(a)} disabled={role?.role === "instructor" || role?.role === "admin" || (a.availableSeats === 0)} className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>
                 )
             }
-            {/* <ToastContainer></ToastContainer> */}
-
+            
         </div>
     );
 };
