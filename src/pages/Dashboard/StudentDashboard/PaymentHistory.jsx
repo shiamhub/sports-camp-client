@@ -18,9 +18,6 @@ const PaymentHistory = () => {
             })
     }, [axiosSecure, user?.email]);
 
-    const handleDelete = (id) => {
-        console.log(id);
-    }
     const handleModal = (id) => {
         const inResultId = history?.inResult?.find((a) => a._id === id);
         const cartItems = inResultId.addCartItems
@@ -43,7 +40,6 @@ const PaymentHistory = () => {
                             <th>Price</th>
                             <th>Date</th>
                             <th>Details</th>
-                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +51,7 @@ const PaymentHistory = () => {
                                 <td>{a.price}</td>
                                 <td>{a.date}</td>
                                 <td><button onClick={() => handleModal(a._id)} className="btn btn-primary btn-sm text-white">View Details</button></td>
-                                <td><button onClick={() => handleDelete(a._id)} className="btn btn-error btn-sm text-white">Delete</button></td>
+                                
                             </tr>
                             )}
                     </tbody>

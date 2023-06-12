@@ -51,12 +51,7 @@ const MyClasses = () => {
                                 <td>{a?.availableSeats}</td>
                                 <td>{a?.price}</td>
                                 <td>{a?.status}</td>
-                                {/* <td>
-                                    <div>
-                                        <button onClick={() => handleApproved(a._id)} className="btn btn-success btn-sm text-white mr-5">Approved</button>
-                                        <button onClick={() => handleDenied(a._id)} className="btn btn-error btn-sm text-white">Denied</button>
-                                    </div>
-                                </td> */}
+                                
                             </tr>)
                         }
                     </tbody>

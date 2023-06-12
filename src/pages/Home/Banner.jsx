@@ -10,8 +10,7 @@ import 'swiper/css/navigation';
 import { Autoplay, Pagination, Navigation } from 'swiper';
 
 import img1 from './../../assets/images/gettyimages-637332860.jpg'
-// import img3 from './../../assets/images/R (1).jpg'
-import img5 from './../../assets/images/wallpapersden.com_athletes-running-sports_2000x1335.jpg'
+import img3 from './../../assets/images/wallpapersden.com_athletes-running-sports_2000x1335.jpg'
 
 const Banner = () => {
     return (
@@ -32,7 +31,7 @@ const Banner = () => {
             >
                 <SwiperSlide><img src={img1} alt="" /></SwiperSlide>
                 {/* <SwiperSlide><img src={img3} alt="" /></SwiperSlide> */}
-                <SwiperSlide><img src={img5} alt="" /></SwiperSlide>
+                <SwiperSlide><img src={img3} alt="" /></SwiperSlide>
             </Swiper>
         </div>
     );

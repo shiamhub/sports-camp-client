@@ -20,22 +20,6 @@ const PaymentClasses = () => {
             return res.data;
         }
     })
-    // const [axiosSecure] = useAxiosSecure();
-    // const { data: addCart } = useQuery({
-    //     queryKey: ["addCart", id],
-    //     enabled: !loading,
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/addCart?email=${user?.email}`);
-    //         return res.data;
-    //     }
-    // })
-    // console.log(addCart.price);
-    // const total = addCart.price;
-    // console.log(total);
-    
-    // const total = addCart?.reduce((sum, item) => item.price + sum, 0);
-    // const price = parseFloat(total.toFixed(2));
-    // console.log(price);
 
     return (
         <div className="w-full">
