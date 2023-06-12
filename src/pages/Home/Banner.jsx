@@ -9,8 +9,9 @@ import 'swiper/css/navigation';
 
 import { Autoplay, Pagination, Navigation } from 'swiper';
 
-import img1 from './../../assets/images/gettyimages-637332860.jpg'
-import img3 from './../../assets/images/wallpapersden.com_athletes-running-sports_2000x1335.jpg'
+import img1 from './../../assets/images/d9c1f6230cfd08ad3c5d0b4bc31a9fcf.jpg'
+import img2 from './../../assets/images/R (2).jpg'
+import img3 from './../../assets/images/R.jpg'
 
 const Banner = () => {
     return (
@@ -30,7 +31,7 @@ const Banner = () => {
                 className="mySwiper"
             >
                 <SwiperSlide><img src={img1} alt="" /></SwiperSlide>
-                {/* <SwiperSlide><img src={img3} alt="" /></SwiperSlide> */}
+                <SwiperSlide><img src={img2} alt="" /></SwiperSlide>
                 <SwiperSlide><img src={img3} alt="" /></SwiperSlide>
             </Swiper>
         </div>
