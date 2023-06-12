@@ -31,12 +31,9 @@ const AllUsers = () => {
             confirmButtonText: 'Yes, Instructor it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/instructor/${id}`, {
-                    method: 'PATCH'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.modifiedCount) {
+                axiosSecure.patch(`/user/instructor/${id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount) {
                             refetch();
                             Swal.fire(
                                 'Instructor!',
@@ -45,6 +42,20 @@ const AllUsers = () => {
                             )
                         }
                     })
+                // fetch(`http://localhost:5000/user/instructor/${id}`, {
+                //     method: 'PATCH'
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         if (data.modifiedCount) {
+                //             refetch();
+                            // Swal.fire(
+                            //     'Instructor!',
+                            //     'Your Are Instructor.',
+                            //     'success'
+                            // )
+                //         }
+                //     })
 
             }
         })
@@ -58,23 +69,35 @@ const AllUsers = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Yes, Admin it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://assignment-12-server-shiamhub.vercel.app/user/admin/${id}`, {
-                    method: 'PATCH'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.modifiedCount) {
+                axiosSecure.patch(`/user/admin/${id}`)
+                    .then(res => {
+                        if (res.data.modifiedCount) {
                             refetch();
                             Swal.fire(
-                                'Deleted!',
-                                'Your file has been deleted.',
+                                'Admin!',
+                                'Your Are Admin.',
                                 'success'
                             )
                         }
                     })
+
+                // fetch(`http://localhost:5000/user/admin/${id}`, {
+                //     method: 'PATCH'
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         if (data.modifiedCount) {
+                //             refetch();
+                //             Swal.fire(
+                //                 'Deleted!',
+                //                 'Your file has been deleted.',
+                //                 'success'
+                //             )
+                //         }
+                //     })
 
             }
         })

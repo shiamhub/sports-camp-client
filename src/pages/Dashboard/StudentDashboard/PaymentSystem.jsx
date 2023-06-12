@@ -79,13 +79,12 @@ const PaymentSystem = ({price, addCart}) => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price,
-                date: new Date(),
+                date: new Date().toDateString(),
                 quantity: addCart.length,
                 status: 'Processing',
                 
                 cartItems: addCart._id,
                 addCartItems: addCart.cartId,
-                
             }
             
             axiosSecure.post("/payments", payment)

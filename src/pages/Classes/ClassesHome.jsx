@@ -2,15 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useRole from "../../hooks/useRole";
+// import { ToastContainer, toast } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css';
 
 const ClassesHome = () => {
     const [classes, setClasses] = useState([]);
     const { user } = useContext(AuthContext);
+    const [role] = useRole();
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
-        fetch('https://assignment-12-server-shiamhub.vercel.app/class')
+        fetch('http://localhost:5000/class')
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [])
@@ -25,7 +29,7 @@ const ClassesHome = () => {
                 cartId: a._id,
             }
             console.log(addItem);
-            fetch('https://assignment-12-server-shiamhub.vercel.app/addCart', {
+            fetch('http://localhost:5000/addCart', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -33,10 +37,13 @@ const ClassesHome = () => {
                 body: JSON.stringify(addItem)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    // toast("Added to cart successfully");
+                    console.log(data)
+                })
         } else {
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Login to add to cart?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -62,12 +69,13 @@ const ClassesHome = () => {
                         <p>Available seats: {a.availableSeats}</p>
                         <p>Price: {a.price}</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => handleAddToCart(a)} disabled={(a.availableSeats === 0)} className="btn btn-primary">Add to cart</button>
+                            <button onClick={() => handleAddToCart(a)} disabled={role?.role === "instructor" || role?.role === "admin" || (a.availableSeats === 0) } className="btn btn-primary">Add to cart</button>
                         </div>
                     </div>
                 </div>
                 )
             }
+            {/* <ToastContainer></ToastContainer> */}
 
         </div>
     );

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const Instructors = () => {
     const [instructors, setInstructors] = useState([]);
     useEffect(() => {
-        fetch("https://assignment-12-server-shiamhub.vercel.app/class")
+        fetch("http://localhost:5000/class")
             .then(res => res.json())
             .then(data => setInstructors(data))
     }, [])

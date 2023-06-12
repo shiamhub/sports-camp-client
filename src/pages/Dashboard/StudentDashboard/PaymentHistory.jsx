@@ -32,6 +32,7 @@ const PaymentHistory = () => {
                                 <th>TransactionId</th>
                                 {/* <th>Email</th> */}
                                 <th>Price</th>
+                                <th>Date</th>
                                 <th>Details</th>
                                 <th>Delete</th>
                             </tr>
@@ -43,6 +44,7 @@ const PaymentHistory = () => {
                                     <td>{a.transactionId}</td>
                                     {/* <td>{a.instructorEmail}</td> */}
                                     <td>{a.price}</td>
+                                    <td>{a.date}</td>
                                     <td><button className="btn btn-primary btn-sm text-white">View Details</button></td>
                                     <td><button onClick={() => handleDelete(a._id)} className="btn btn-error btn-sm text-white">Delete</button></td>
                                 </tr>

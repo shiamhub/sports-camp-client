@@ -15,6 +15,7 @@ const Feedback = () => {
             const res = await axiosSecure.get(`/myClasses?email=${user?.email}`);
             return res.data;
         }
+
     })
     const handleModal = (a) => {
         setDone(a.feedBack);
@@ -27,7 +28,8 @@ const Feedback = () => {
                 <table className="table">
                     <thead>
                         <tr className="text-center">
-                            <th>Class Name</th>                            
+                            <th>Delete</th>
+                            <th>Class Name</th>
                             <th>Status</th>
                             <th className="text-start">FeedBack</th>
 
@@ -36,10 +38,15 @@ const Feedback = () => {
                     <tbody>
                         {
                             myClasses?.map((a) => a.feedBack && <tr key={a._id} className="text-center hover">
-                            <td>{a?.className}</td>
-                            <td>{a?.status}</td>
-                            <td className="text-start text-lg cursor-pointer text-blue-700 hover:underline"><a onClick={() => handleModal(a)}>{a?.feedBack.slice(0, 70)}...</a></td>
-                        </tr> 
+                                <td>
+                                    <button className="btn btn-circle btn-outline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                    </button>
+                                </td>
+                                <td>{a?.className}</td>
+                                <td>{a?.status}</td>
+                                <td className="text-start text-lg cursor-pointer text-blue-700 hover:underline"><a onClick={() => handleModal(a)}>{a?.feedBack.slice(0, 70)}...</a></td>
+                            </tr>
                             )
                         }
                     </tbody>

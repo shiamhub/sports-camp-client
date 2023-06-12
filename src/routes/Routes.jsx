@@ -19,6 +19,7 @@ import StudentRoute from "./StudentRoute";
 import PrivateRoute from "./PrivateRoute";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses";
 import Feedback from "../pages/Dashboard/InstructorDashboard/Feedback";
+import AdminRoute from "./AdminRoute";
 
 const Routes = createBrowserRouter([
     {
@@ -55,15 +56,15 @@ const Routes = createBrowserRouter([
         children: [
             {
                 path: '/dashboard/allUsers',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: '/dashboard/selectedClasses',
-                element: <SelectedClasses></SelectedClasses>
+                element: <StudentRoute><SelectedClasses></SelectedClasses></StudentRoute>
             },
             {
                 path: '/dashboard/enrolledClasses',
-                element: <EnrolledClasses></EnrolledClasses>
+                element: <StudentRoute><EnrolledClasses></EnrolledClasses></StudentRoute>
             },
             {
                 path: '/dashboard/addClass',
@@ -71,7 +72,7 @@ const Routes = createBrowserRouter([
             },
             {
                 path: '/dashboard/manageClasses',
-                element: <ManageClasses></ManageClasses>
+                element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
             },
             {
                 path: '/dashboard/paymentClasses',
